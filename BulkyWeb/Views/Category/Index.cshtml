@@ -1,0 +1,50 @@
+﻿@model List<Category>
+
+   @* <partial name="_Notification"/>*@
+
+<div class="container py-8 px-3">
+
+        <div class="row pt-4 pb-23">
+            <div class="col-6">
+                <h2 class="text-primary"> Category List</h2>
+            </div>
+            <div class="col-6 text-end">
+                <a asp-controller="Category" asp-action="Create" class="btn btn-primary rounded">
+                Create New Category <i class="bi bi-plus-circle"></i>
+                </a>
+            </div>
+        </div>
+
+    <table class="table table-bordered  table-striped">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Category Name</th>
+            <th>Display Order</th>
+            <th class="text-center">Action</th>
+
+        </tr>
+    </thead>
+        <tbody>
+        @foreach(var obj in Model.OrderBy( U => U.DisplayOrder))
+        {
+            <tr>
+                <td>@obj.Id</td>
+                <td>@obj.Name</td>
+                <td>@obj.DisplayOrder</td>
+                <td>
+                    <div class="w-75 btn-group" role="group">
+                        <a asp-controller="category" asp-route-id="@obj.Id" asp-action="Edit" 
+                        class="btn btn-info mx-2 rounded"> 
+                    <i class="bi bi-pencil-square"></i>Edit </a>
+                            <a asp-controller="category" asp-route-id="@obj.Id" asp-action="Delete"
+                               class="btn btn-danger mx-2 rounded">
+                                <i class="bi bi-trash-fill"></i>Delete
+                            </a>
+                    </div>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>
